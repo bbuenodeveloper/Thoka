@@ -1,5 +1,5 @@
 import logo from "../../../img/logo.png"
-import { Link } from "react-router-dom"
+import  {  HashLink as Link  }  from  'react-router-hash-link'
 
 
 function Nav() {
@@ -10,8 +10,8 @@ function Nav() {
                 <img src={logo} alt='logo' className='cursor-pointer scale-50' />
                 <nav>
                     <ul>
-                        <Link className='mr-3 font-bold'>Serviços</Link>
-                        <Link className='mr-2 font-bold'>Sobre</Link>
+                        <Link to='#servico' className='mr-3 font-bold'>Serviços</Link>
+                        <Link to='#sobre' className='mr-2 font-bold'>Sobre</Link>
                         <Link className='font-bold mr-5'>Contato</Link>
                     </ul>
                 </nav>
