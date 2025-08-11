@@ -50,8 +50,8 @@ function Contato() {
 
     return (
         <div id='contato' className=' border-b border-b-gray-600'>
-            <h1 className='text-center font-montserrat text-4xl font-bold text-white pt-10' >Contato</h1>
-            <div className='h-full flex justify-center pt-15 pb-15'>
+            <h1 className='text-center font-montserrat text-4xl font-bold text-white pt-5' >Contato</h1>
+            <div className='h-full flex justify-center pt-10 pb-15'>
                 <div className='h-100 w-100 mr-15'>
                     {
                         isLoaded ? (

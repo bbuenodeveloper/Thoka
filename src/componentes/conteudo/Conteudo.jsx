@@ -29,42 +29,42 @@ function Conteudo() {
     return (
         <div>
             <div id='servico' className='bg-red-700 h-full'>
-                <h1 className='flex justify-center font-montserrat text-4xl font-bold text-white pt-4 invisivel' > Serviços</h1>
-                <div className='p-5 flex justify-around'>
+                <h1 className='flex justify-center font-montserrat text-4xl font-bold text-white pt-5 invisivel' > Serviços</h1>
+                <div className='p-10 flex justify-around'>
                     <div className='grid grid-cols-3 gap-10 invisivel'>
-                        <div className='m-5'>
-                            <img src={servico1} alt='serviços que realizamos' className='h-50 rounded-t-xl' />
-                            <div className='w-50 p-5 bg-cyan-900 rounded-b-xl'>
+                        <div>
+                            <img src={servico1} alt='serviços que realizamos' className='w-60 h- rounded-t-xl' />
+                            <div className='w-60 p-5 bg-cyan-900 rounded-b-xl'>
                                 <p className='text-xs font-bold h-15 text-center tracking-wide'>Alguns de nossos serviços que realizamos para deixar seu carro perfeito!!</p>
                             </div>
                         </div>
-                        <div className='m-5'>
-                            <img src={servico1} alt='serviços que realizamos' className='h-50 rounded-t-xl' />
-                            <div className='w-50 p-5 bg-cyan-900 rounded-b-xl'>
+                        <div>
+                            <img src={servico1} alt='serviços que realizamos' className='w-60 h-60 rounded-t-xl' />
+                            <div className='w-60 p-5 bg-cyan-900 rounded-b-xl'>
                                 <p className='text-xs font-bold h-15 text-center tracking-wide'>Alguns de nossos serviços que realizamos para deixar seu carro perfeito!!</p>
                             </div>
                         </div>
-                        <div className='m-5'>
-                            <img src={servico1} alt='serviços que realizamos' className='h-50 rounded-t-xl' />
-                            <div className='w-50 p-5 bg-cyan-900 rounded-b-xl'>
+                        <div>
+                            <img src={servico1} alt='serviços que realizamos' className='w-60 h-60 rounded-t-xl' />
+                            <div className='w-60 p-5 bg-cyan-900 rounded-b-xl'>
                                 <p className='text-xs font-bold h-15 text-center tracking-wide'>Alguns de nossos serviços que realizamos para deixar seu carro perfeito!!</p>
                             </div>
                         </div>
-                        <div className='m-5'>
-                            <img src={servico1} alt='serviços que realizamos' className='h-50 rounded-t-xl' />
-                            <div className='w-50 p-5 bg-cyan-900 rounded-b-xl'>
+                        <div>
+                            <img src={servico1} alt='serviços que realizamos' className='w-60 h-60 rounded-t-xl' />
+                            <div className='w-60 p-5 bg-cyan-900 rounded-b-xl'>
                                 <p className='text-xs font-bold h-15 text-center tracking-wide'>Alguns de nossos serviços que realizamos para deixar seu carro perfeito!!</p>
                             </div>
                         </div>
-                        <div className='m-5'>
-                            <img src={servico1} alt='serviços que realizamos' className='h-50 rounded-t-xl' />
-                            <div className='w-50 p-5 bg-cyan-900 rounded-b-xl'>
+                        <div>
+                            <img src={servico1} alt='serviços que realizamos' className='w-60 h-60 rounded-t-xl' />
+                            <div className='w-60 p-5 bg-cyan-900 rounded-b-xl'>
                                 <p className='text-xs font-bold h-15 text-center tracking-wide'>Alguns de nossos serviços que realizamos para deixar seu carro perfeito!!</p>
                             </div>
                         </div>
-                        <div className='m-5'>
-                            <img src={servico1} alt='serviços que realizamos' className='h-50 rounded-t-xl' />
-                            <div className='w-50 p-5 bg-cyan-900 rounded-b-xl'>
+                        <div>
+                            <img src={servico1} alt='serviços que realizamos' className='w-60 h-60 rounded-t-xl' />
+                            <div className='w-60 p-5 bg-cyan-900 rounded-b-xl'>
                                 <p className='text-xs font-bold h-15 text-center tracking-wide'>Alguns de nossos serviços que realizamos para deixar seu carro perfeito!!</p>
                             </div>
                         </div>
