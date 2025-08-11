@@ -3,7 +3,9 @@
 
 @theme{
     --font-montserrat: "Montserrat", sans-serif;
+    --color-roxo: #2d106f;
 }
+
 
 :root {
     margin: 0;

@@ -1,6 +1,6 @@
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api'
 import { useRef, useState } from 'react'
-
+import { FaMapMarkerAlt  } from "react-icons/fa";
 
 
 
@@ -67,8 +67,11 @@ function Contato() {
                             < > </ >
                         )
                     }
+                   
+                    <p className='flex mt-3 items-center text-xs'><FaMapMarkerAlt className='mr-2' /> Rua jose Pardelli, 19 - Parque Mandaqui</p>
+                   
                 </div>
-                <form className='flex flex-col bg-indigo-900 w-100 h-100 rounded gap-3 p-4 items-center'>
+                <form className='flex flex-col bg-roxo w-100 h-100 rounded gap-3 p-4 items-center'>
                     <input placeholder='Digite seu nome' type="text" ref={nomeRef} className='placeholder-white border border-gray-400 w-full p-2 rounded-2xl outline-0 cursor-pointer mt-5' />
                     <textarea placeholder='Digite sua mensagem' type="text" ref={mensagemRef} maxLength={charLimit}
                         onChange={(e) => setCharCount(e.target.value.length)}
