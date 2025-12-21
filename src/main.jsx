@@ -1,18 +1,38 @@
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import App from './App.jsx'
-import Home from './pages/Home.jsx'
-
+import React from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.jsx";
+import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from './context/AuthContext'; // Import AuthProvider
 import {register} from 'swiper/element/bundle'
 
 register();
 import 'swiper/css';
 import 'swiper/css/autoplay';
 
-createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
-    <Routes>
-      <Route path='/' element={ <Home />} />
-    </Routes> 
-  </BrowserRouter>,
-)
+async function enableMocking() {
+  if (process.env.NODE_ENV !== "development") {
+    return;
+  }
+
+  const { worker } = await import("./mocks/browser");
+  return worker.start();
+}
+
+async function init() {
+  await enableMocking(); // Espera o MSW inicializar
+
+  const rootElement = document.getElementById("root");
+  const root = createRoot(rootElement);
+
+  root.render(
+    <React.StrictMode>
+      <BrowserRouter>
+        <AuthProvider> {/* Wrap App with AuthProvider here */}
+          <App />
+        </AuthProvider>
+      </BrowserRouter>
+    </React.StrictMode>
+  );
+}
+
+init();

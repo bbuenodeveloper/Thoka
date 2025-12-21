@@ -29,5 +29,10 @@
     transition: all 2s;
 }
 
+.cart-icon {
+    margin-left: 1rem;
+    font-size: 1.5rem;
+}
+
 
 
