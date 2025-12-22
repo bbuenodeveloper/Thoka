@@ -40,16 +40,16 @@ function Nav() {
                     {isLoggedIn ? (
                         <>
                             <span className="text-white mr-2">Olá, {user?.name}!</span>
-                            <button onClick={logout} className="text-white font-bold py-2 px-4 rounded mr-2">
+                            <button onClick={logout} className="text-white font-bold py-2 px-4 rounded mr-2 cursor-pointer">
                                 Sair
                             </button>
                         </>
                     ) : (
                         <>
-                            <button onClick={handleOpenLoginModal} className="text-white font-bold py-2 px-4 rounded mr-2">
+                            <button onClick={handleOpenLoginModal} className="text-white font-bold py-2 px-4 rounded mr-2 cursor-pointer">
                                 Login
                             </button>
-                            <button onClick={handleOpenSignUpModal} className="text-white font-bold py-2 px-4 rounded">
+                            <button onClick={handleOpenSignUpModal} className="text-white font-bold py-2 px-4 rounded cursor-pointer">
                                 Cadastrar
                             </button>
                         </>
