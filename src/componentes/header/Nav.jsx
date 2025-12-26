@@ -31,8 +31,16 @@ function Nav() {
                 <nav className="flex items-center justify-center">
                     <div>
                         <Link to='#home' className='mr-3 font-bold'>Home</Link>
-                        <Link to='#servico' className='mr-3 font-bold'>Serviços</Link>
-                        <Link to='#sobre' className='mr-2 font-bold'>Sobre</Link>
+                        {isLoggedIn ? (
+                            <>
+                                <Link to='#marketplace' className='mr-3 font-bold'>Marketplace</Link>
+                            </>
+                        ) : (
+                            <>
+                                <Link to='#servico' className='mr-3 font-bold'>Serviços</Link>
+                                <Link to='#sobre' className='mr-2 font-bold'>Sobre</Link>
+                            </>
+                        )}
                         <Link to='#contato' className='font-bold mr-5'>Contato</Link>
                     </div>
                 </nav>

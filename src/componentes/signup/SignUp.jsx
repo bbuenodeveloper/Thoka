@@ -21,6 +21,14 @@ export default function SignUp({ isOpen, onClose, onSwitchToLogin }) { // Now ac
         body: JSON.stringify(formData),
       });
 
+      const contentType = res.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+          const text = await res.text();
+          console.error("Signup response was not JSON:", text);
+          setMessage("Ocorreu um erro inesperado no servidor.");
+          return;
+      }
+
       const data = await res.json();
 
       if (!res.ok) {
@@ -32,7 +40,8 @@ export default function SignUp({ isOpen, onClose, onSwitchToLogin }) { // Now ac
         setTimeout(() => onClose(), 2000); // Use onClose prop
       }
     } catch (err) {
-      setMessage("Erro ao cadastrar");
+      console.error("Fetch failed:", err); // Log the actual error
+      setMessage("Erro ao cadastrar. Verifique sua conexão ou tente novamente.");
     }
   };
 
