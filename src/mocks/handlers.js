@@ -1,6 +1,7 @@
 import { http, HttpResponse } from 'msw';
 
 let users = []; // "banco de dados" em memória
+let checkouts = []; // "banco de dados" para checkout
 
 export const handlers = [
   http.post('/api/signup', async ({ request }) => {
@@ -40,7 +41,20 @@ export const handlers = [
     );
   }),
 
+  http.post('/api/checkout', async ({ request }) => {
+    const checkoutData = await request.json();
+    
+    // Payment is assumed successful due to prior validation
+    const newCheckout = { id: checkouts.length + 1, ...checkoutData, status: 'approved' };
+    checkouts.push(newCheckout);
+    return HttpResponse.json({ message: 'Pagamento aprovado!' }, { status: 200 });
+  }),
+
   http.get('/api/users', () => {
     return HttpResponse.json(users);
+  }),
+
+  http.get('/api/checkouts', () => {
+    return HttpResponse.json(checkouts);
   }),
 ];

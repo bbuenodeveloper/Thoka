@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useCart } from '../../context/CartContext';
 import Ps5 from '../../../img/ps5.webp';
 import Xbox from '../../../img/xbox.jpg';
 
@@ -63,12 +64,7 @@ const products = [
 ];
 
 function Marketplace() {
-  const [cart, setCart] = useState([]);
-
-  const addToCart = (product) => {
-    setCart((prevCart) => [...prevCart, product]);
-    alert(`${product.name} adicionado ao carrinho!`);
-  };
+  const { addToCart } = useCart();
 
   return (
     <div className="container mx-auto p-4">
@@ -93,13 +89,6 @@ function Marketplace() {
           </div>
         ))}
       </div>
-      {/* Optionally, display cart items or a cart link here */}
-      {cart.length > 0 && (
-        <div className="mt-8 p-4 bg-gray-100 rounded-lg">
-          <h3 className="text-2xl font-bold mb-4 text-gray-800">Carrinho ({cart.length} itens)</h3>
-          {/* A more detailed cart view would go here */}
-        </div>
-      )}
     </div>
   );
 }

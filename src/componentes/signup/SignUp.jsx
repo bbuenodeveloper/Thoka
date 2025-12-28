@@ -1,95 +1,112 @@
 import React, { useState } from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import Modal from './Modal';
 
-export default function SignUp({ isOpen, onClose, onSwitchToLogin }) { // Now accepts isOpen, onClose, onSwitchToLogin as props
-  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+const validationSchema = Yup.object({
+  name: Yup.string().required('Nome obrigatório'),
+  email: Yup.string().email('Email inválido').matches(/@.+\.(com|com\.br)$/i, 'Email deve terminar com .com ou .com.br').required('Email obrigatório'),
+  password: Yup.string().required('Senha obrigatória'),
+});
+
+export default function SignUp({ isOpen, onClose, onSwitchToLogin }) {
   const [message, setMessage] = useState('');
 
-  const handleChange = e => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      email: '',
+      password: '',
+    },
+    validationSchema,
+    onSubmit: async (values, { setSubmitting, resetForm }) => {
+      setMessage('');
+      try {
+        const res = await fetch("/api/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(values),
+        });
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    setMessage('');
+        const contentType = res.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+            const text = await res.text();
+            console.error("Signup response was not JSON:", text);
+            setMessage("Ocorreu um erro inesperado no servidor.");
+            return;
+        }
 
-    try {
-      const res = await fetch("/api/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+        const data = await res.json();
 
-      const contentType = res.headers.get("content-type");
-      if (!contentType || !contentType.includes("application/json")) {
-          const text = await res.text();
-          console.error("Signup response was not JSON:", text);
-          setMessage("Ocorreu um erro inesperado no servidor.");
-          return;
+        if (!res.ok) {
+          setMessage(data.message || "Erro no cadastro");
+        } else {
+          setMessage(`Usuário ${data.name} cadastrado com sucesso!`);
+          resetForm();
+          setTimeout(() => onClose(), 2000);
+        }
+      } catch (err) {
+        console.error("Fetch failed:", err);
+        setMessage("Erro ao cadastrar. Verifique sua conexão ou tente novamente.");
+      } finally {
+        setSubmitting(false);
       }
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setMessage(data.message || "Erro no cadastro");
-      } else {
-        setMessage(`Usuário ${data.name} cadastrado com sucesso!`);
-        setFormData({ name: '', email: '', password: '' });
-        // Optionally close modal after a short delay on success
-        setTimeout(() => onClose(), 2000); // Use onClose prop
-      }
-    } catch (err) {
-      console.error("Fetch failed:", err); // Log the actual error
-      setMessage("Erro ao cadastrar. Verifique sua conexão ou tente novamente.");
-    }
-  };
+    },
+  });
 
   const handleLoginButtonClick = () => {
-    onClose(); // Use onClose prop to close signup modal
-    onSwitchToLogin();  // Call parent function to open login modal
+    onClose();
+    onSwitchToLogin();
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}> {/* Use isOpen and onClose props */}
+    <Modal isOpen={isOpen} onClose={onClose}>
       <h2 className="text-2xl font-bold mb-4">Cadastro de Usuário</h2>
 
-      <form onSubmit={handleSubmit} className="space-y-2">
+      <form onSubmit={formik.handleSubmit} className="space-y-2">
         <input
           type="text"
           name="name"
           placeholder="Nome"
-          value={formData.name}
-          onChange={handleChange}
-          required
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.name}
           className="border p-2 w-full text-black"
         />
+        {formik.touched.name && formik.errors.name ? (
+          <div className="text-red-500 text-sm">{formik.errors.name}</div>
+        ) : null}
         <input
           type="email"
           name="email"
           placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.email}
           className="border p-2 w-full text-black"
         />
+        {formik.touched.email && formik.errors.email ? (
+          <div className="text-red-500 text-sm">{formik.errors.email}</div>
+        ) : null}
         <input
           type="password"
           name="password"
           placeholder="Senha"
-          value={formData.password}
-          onChange={handleChange}
-          required
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.password}
           className="border p-2 w-full text-black"
         />
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+        {formik.touched.password && formik.errors.password ? (
+          <div className="text-red-500 text-sm">{formik.errors.password}</div>
+        ) : null}
+        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded" disabled={formik.isSubmitting}>
           Cadastrar
         </button>
       </form>
 
       {message && <p className="mt-2 text-black">{message}</p>}
 
-      {/* New Login button */}
       <div className="mt-4 text-center">
         <p className="text-sm text-gray-700">Já tem uma conta?</p>
         <button

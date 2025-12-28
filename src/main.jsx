@@ -2,6 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
+import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext'; // Import AuthProvider
 import {register} from 'swiper/element/bundle'
 
@@ -27,8 +28,10 @@ async function init() {
   root.render(
     <React.StrictMode>
       <BrowserRouter>
-        <AuthProvider> {/* Wrap App with AuthProvider here */}
-          <App />
+        <AuthProvider>
+          <CartProvider>
+            <App />
+          </CartProvider>
         </AuthProvider>
       </BrowserRouter>
     </React.StrictMode>

@@ -1,22 +1,39 @@
 import React, { useState, useContext } from 'react';
 import logo from "../../../img/logo.png"
 import { HashLink as Link } from 'react-router-hash-link'
-import Cart from "../cart/Cart"
 import Login from '../login/Login'
 import SignUp from '../signup/SignUp'
+import CartModal from '../cart/CartModal';
+import CheckoutModal from '../checkout/CheckoutModal';
 import { AuthContext } from '../../context/AuthContext'; // Import AuthContext
+import { useCart } from '../../context/CartContext';
+import { RiShoppingCartLine } from 'react-icons/ri';
 
 
 function Nav() {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+    const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+    const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
     const { isLoggedIn, user, logout } = useContext(AuthContext); // Use AuthContext
+    const { cartItems } = useCart();
 
     const handleOpenLoginModal = () => setIsLoginModalOpen(true);
     const handleCloseLoginModal = () => setIsLoginModalOpen(false);
 
     const handleOpenSignUpModal = () => setIsSignUpModalOpen(true);
     const handleCloseSignUpModal = () => setIsSignUpModalOpen(false);
+    
+    const handleOpenCartModal = () => setIsCartModalOpen(true);
+    const handleCloseCartModal = () => setIsCartModalOpen(false);
+
+    const handleOpenCheckoutModal = () => setIsCheckoutModalOpen(true);
+    const handleCloseCheckoutModal = () => setIsCheckoutModalOpen(false);
+
+    const handleGoToCheckout = () => {
+        handleCloseCartModal();
+        handleOpenCheckoutModal();
+    };
 
     const handleSwitchToLogin = () => {
         handleCloseSignUpModal();
@@ -51,6 +68,14 @@ function Nav() {
                             <button onClick={logout} className="text-white font-bold py-2 px-4 rounded mr-2 cursor-pointer">
                                 Sair
                             </button>
+                            <button onClick={handleOpenCartModal} className="relative text-white font-bold py-2 px-4 rounded cursor-pointer">
+                                <RiShoppingCartLine size={24} />
+                                {cartItems.length > 0 && (
+                                    <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                                        {cartItems.reduce((acc, item) => acc + item.quantity, 0)}
+                                    </span>
+                                )}
+                            </button>
                         </>
                     ) : (
                         <>
@@ -63,8 +88,6 @@ function Nav() {
                         </>
                     )}
 
-                    <Cart />
-
                     {/* Modals rendered based on state */}
                     <Login
                         isOpen={isLoginModalOpen}
@@ -74,6 +97,15 @@ function Nav() {
                         isOpen={isSignUpModalOpen}
                         onClose={handleCloseSignUpModal}
                         onSwitchToLogin={handleSwitchToLogin}
+                    />
+                    <CartModal 
+                        isOpen={isCartModalOpen}
+                        onClose={handleCloseCartModal}
+                        onGoToCheckout={handleGoToCheckout}
+                    />
+                    <CheckoutModal
+                        isOpen={isCheckoutModalOpen}
+                        onClose={handleCloseCheckoutModal}
                     />
                 </aside>
             </div>
