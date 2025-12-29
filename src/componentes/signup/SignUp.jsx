@@ -61,51 +61,68 @@ export default function SignUp({ isOpen, onClose, onSwitchToLogin }) {
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <h2 className="text-2xl font-bold mb-4">Cadastro de Usuário</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">Cadastro de Usuário</h2>
 
-      <form onSubmit={formik.handleSubmit} className="space-y-2">
-        <input
-          type="text"
-          name="name"
-          placeholder="Nome"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.name}
-          className="border p-2 w-full text-black"
-        />
-        {formik.touched.name && formik.errors.name ? (
-          <div className="text-red-500 text-sm">{formik.errors.name}</div>
-        ) : null}
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.email}
-          className="border p-2 w-full text-black"
-        />
-        {formik.touched.email && formik.errors.email ? (
-          <div className="text-red-500 text-sm">{formik.errors.email}</div>
-        ) : null}
-        <input
-          type="password"
-          name="password"
-          placeholder="Senha"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.password}
-          className="border p-2 w-full text-black"
-        />
-        {formik.touched.password && formik.errors.password ? (
-          <div className="text-red-500 text-sm">{formik.errors.password}</div>
-        ) : null}
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded" disabled={formik.isSubmitting}>
-          Cadastrar
-        </button>
+      <form onSubmit={formik.handleSubmit}>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+            Nome
+          </label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.name}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+          {formik.touched.name && formik.errors.name ? (
+            <div className="text-red-500 text-sm">{formik.errors.name}</div>
+          ) : null}
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+            Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.email}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+          {formik.touched.email && formik.errors.email ? (
+            <div className="text-red-500 text-sm">{formik.errors.email}</div>
+          ) : null}
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+            Senha
+          </label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.password}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+          {formik.touched.password && formik.errors.password ? (
+            <div className="text-red-500 text-sm">{formik.errors.password}</div>
+          ) : null}
+        </div>
+        <div className="flex items-center justify-end">
+          <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer" disabled={formik.isSubmitting}>
+            Cadastrar
+          </button>
+        </div>
       </form>
 
-      {message && <p className="mt-2 text-black">{message}</p>}
+      {message && <p className="mt-4 text-center text-black">{message}</p>}
 
       <div className="mt-4 text-center">
         <p className="text-sm text-gray-700">Já tem uma conta?</p>

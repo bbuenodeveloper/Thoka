@@ -76,7 +76,7 @@ function Contato() {
                     <textarea placeholder='Digite sua mensagem' type="text" ref={mensagemRef} maxLength={charLimit}
                         onChange={(e) => setCharCount(e.target.value.length)}
                         className='placeholder-white border border-gray-400 w-full h-50 p-2 rounded-2xl outline-0 cursor-pointe resize-none cursor-pointer' />{charCount}/{charLimit}
-                    <button onClick={handleSubmit} className='bg-red-700 w-50 p-2 rounded-2xl text-center font-bold font-montserrat hover:scale-110 tracking-wide'>Fale conosco</button>
+                    <button onClick={handleSubmit} className='bg-red-700 w-50 p-2 rounded-2xl text-center font-bold font-montserrat hover:scale-110 tracking-wide cursor-pointer'>Fale conosco</button>
                 </form>
             </div>
         </div>

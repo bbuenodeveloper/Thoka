@@ -35,7 +35,7 @@ function CartModal({ isOpen, onClose, onGoToCheckout }) {
             <div ref={modalRef} className="bg-gray-50 w-full sm:w-96 h-full flex flex-col shadow-2xl pointer-events-auto">
                 <div className="flex justify-between items-center p-4 border-b border-gray-200">
                     <h2 className="text-xl font-medium text-gray-800">Seu Carrinho</h2>
-                    <button onClick={onClose} className="text-gray-500 hover:text-gray-800 transition-colors">
+                    <button onClick={onClose} className="text-gray-500 hover:text-gray-800 transition-colors cursor-pointer">
                         <RiCloseLine size={28} />
                     </button>
                 </div>
@@ -45,7 +45,7 @@ function CartModal({ isOpen, onClose, onGoToCheckout }) {
                         <p className="text-gray-500">Seu carrinho está vazio.</p>
                         <button 
                             onClick={onClose}
-                            className="mt-4 px-6 py-2 bg-gray-800 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 transition-all"
+                            className="cursor-pointer mt-4 px-6 py-2 bg-gray-800 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 transition-all"
                         >
                             Continuar Comprando
                         </button>
@@ -60,9 +60,9 @@ function CartModal({ isOpen, onClose, onGoToCheckout }) {
                                         <h3 className="font-semibold text-gray-800">{item.name}</h3>
                                         <p className="text-sm text-gray-500">R$ {item.price.toFixed(2)}</p>
                                         <div className="flex items-center mt-2">
-                                            <button onClick={() => removeFromCart(item.id)} className="p-1 rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"><RiSubtractLine /></button>
+                                            <button onClick={() => removeFromCart(item.id)} className="p-1 rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors cursor-pointer"><RiSubtractLine /></button>
                                             <span className="px-3 font-medium">{item.quantity}</span>
-                                            <button onClick={() => addToCart(item)} className="p-1 rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"><RiAddLine /></button>
+                                            <button onClick={() => addToCart(item)} className="p-1 rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors cursor-pointer"><RiAddLine /></button>
                                         </div>
                                     </div>
                                     <p className="font-semibold text-gray-800">R$ {(item.price * item.quantity).toFixed(2)}</p>
@@ -78,13 +78,13 @@ function CartModal({ isOpen, onClose, onGoToCheckout }) {
                             <button 
                                 onClick={onGoToCheckout}
                                 disabled={isCartEmpty}
-                                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg shadow-md transition-all disabled:bg-gray-400 disabled:cursor-not-allowed"
+                                className="cursor-pointer w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg shadow-md transition-all disabled:bg-gray-400 disabled:cursor-not-allowed"
                             >
                                 Finalizar Compra
                             </button>
                             <button 
                                 onClick={() => clearCart()}
-                                className="w-full mt-2 text-sm text-gray-500 hover:text-red-500 transition-colors"
+                                className="cursor-pointer w-full mt-2 mb-5 text-sm text-gray-500 hover:text-red-500 transition-colors"
                             >
                                 Limpar Carrinho
                             </button>

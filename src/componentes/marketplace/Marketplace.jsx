@@ -68,7 +68,7 @@ function Marketplace() {
 
   return (
     <div className="container mx-auto p-4">
-      <h2 className="text-3xl font-bold text-center mb-8">Nosso Marketplace</h2>
+      <h2 className="text-3xl font-bold text-center mb-8">Marketplace</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (
           <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105">

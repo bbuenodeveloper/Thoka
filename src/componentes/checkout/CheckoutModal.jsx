@@ -79,7 +79,7 @@ function CheckoutModal({ isOpen, onClose }) {
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center">
-            <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-md">
+            <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-3xl">
                 <div className="flex justify-between items-center mb-6">
                     <h2 className="text-2xl font-bold">
                         {currentStep === STEPS.ADDRESS && 'Endereço de Entrega'}
@@ -88,7 +88,7 @@ function CheckoutModal({ isOpen, onClose }) {
                         {currentStep === STEPS.SUCCESS && 'Sucesso!'}
                         {currentStep === STEPS.ERROR && 'Erro no Pagamento'}
                     </h2>
-                    <button onClick={handleClose} className="text-gray-600 hover:text-gray-900" disabled={currentStep === STEPS.PROCESSING}>
+                    <button onClick={handleClose} className="text-gray-600 hover:text-gray-900 cursor-pointer" disabled={currentStep === STEPS.PROCESSING}>
                         <RiCloseLine size={24} />
                     </button>
                 </div>
@@ -98,7 +98,7 @@ function CheckoutModal({ isOpen, onClose }) {
                 )}
 
                 {currentStep === STEPS.PAYMENT && (
-                    <PaymentForm onSubmit={handlePaymentSubmit} onBack={handleBack} />
+                    <PaymentForm onSubmit={handlePaymentSubmit} onBack={handleBack} deliveryAddress={checkoutData.address} />
                 )}
 
                 {currentStep === STEPS.PROCESSING && (
